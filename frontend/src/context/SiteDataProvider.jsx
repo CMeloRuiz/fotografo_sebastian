@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { api, hasBackend } from '../lib/api';
 import staticContent from '../data/siteContent';
-import { demoAlbums, featuredPhotos as staticFeatured } from '../data/demoAlbums';
+import { defaultAlbums, featuredPhotos as staticFeatured } from '../data/albums';
 
 const SiteDataContext = createContext(null);
 
@@ -15,7 +15,7 @@ const SiteDataContext = createContext(null);
  */
 export function SiteDataProvider({ children }) {
   const [content, setContent] = useState(staticContent);
-  const [albums, setAlbums] = useState(demoAlbums);
+  const [albums, setAlbums] = useState(defaultAlbums);
   const [isLoading, setIsLoading] = useState(hasBackend);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export function SiteDataProvider({ children }) {
   }, []);
 
   const featuredPhotos = useMemo(() => {
-    if (albums === demoAlbums) return staticFeatured;
+    if (albums === defaultAlbums) return staticFeatured;
     return albums
       .filter((album) => album.isFeatured)
       .flatMap((album) =>

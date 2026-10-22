@@ -17,6 +17,13 @@ export default function Categories({ content, albums }) {
   const coverFor = (slug) => albums.find((a) => a.category === slug)?.cover;
   const hasDemoCovers = albums.some((a) => a.isDemo);
 
+  /*
+   * Sin ningun album todavia no hay portadas que mostrar. Seis marcos
+   * vacios se ven peor que no ponerlos: en ese caso las categorias pasan
+   * a una rejilla de texto, que se sostiene sola.
+   */
+  const hasCovers = content.categories.some((c) => coverFor(c.slug));
+
   return (
     <section className="categories section" id="categorias">
       <div className="container">
@@ -32,7 +39,7 @@ export default function Categories({ content, albums }) {
           </div>
         )}
 
-        <div className="categories__grid">
+        <div className={`categories__grid ${hasCovers ? '' : 'categories__grid--textual'}`}>
           {content.categories.map((category, i) => {
             const cover = coverFor(category.slug);
             return (
@@ -41,20 +48,16 @@ export default function Categories({ content, albums }) {
                   to={`/portafolio?categoria=${category.slug}`}
                   className="category-card"
                 >
-                  <div className="category-card__media">
-                    {cover ? (
+                  {cover && (
+                    <div className="category-card__media">
                       <SmartImage
                         image={cover}
                         alt={`Fotografía de ${category.name.toLowerCase()}`}
                         sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw"
                         aspectRatio="4 / 5"
                       />
-                    ) : (
-                      <div className="category-card__empty" aria-hidden="true">
-                        <Icon name="camera" size={28} />
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   <div className="category-card__body">
                     <h3>{category.name}</h3>

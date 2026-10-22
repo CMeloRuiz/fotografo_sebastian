@@ -7,6 +7,7 @@ import Icon from '../components/ui/Icon';
 import DemoNotice from '../components/ui/DemoNotice';
 import { useSiteData } from '../context/SiteDataProvider';
 import useSeo from '../hooks/useSeo';
+import { whatsappLink } from '../lib/whatsapp';
 import './Portfolio.css';
 
 const ALL = 'todos';
@@ -32,6 +33,7 @@ export default function Portfolio() {
   });
 
   const published = useMemo(() => albums.filter((a) => a.isPublished !== false), [albums]);
+  const wa = whatsappLink(content.contact.whatsapp, content.contact.whatsappMessage);
 
   // Solo ofrecemos filtros de categorias que tengan al menos un album
   const availableCategories = useMemo(() => {
@@ -56,14 +58,24 @@ export default function Portfolio() {
       <PageHero
         eyebrow="Portafolio"
         title="Cada álbum, una historia completa"
-        lead="Entra a cualquier evento y recórrelo como si hubieras estado ahí."
+        lead={
+          published.length > 0
+            ? 'Entra a cualquier evento y recórrelo como si hubieras estado ahí.'
+            : undefined
+        }
       />
 
       <section className="section portfolio">
         <div className="container">
           {hasDemo && <DemoNotice />}
 
-          <div className="portfolio__filters" role="group" aria-label="Filtrar por tipo de evento">
+          {/* Sin álbumes no hay nada que filtrar: la barra solo estorbaría */}
+          <div
+            className="portfolio__filters"
+            role="group"
+            aria-label="Filtrar por tipo de evento"
+            hidden={published.length === 0}
+          >
             <button
               type="button"
               className={`filter-pill ${active === ALL ? 'is-active' : ''}`}
@@ -91,7 +103,29 @@ export default function Portfolio() {
             })}
           </div>
 
-          {visible.length === 0 ? (
+          {published.length === 0 ? (
+            /* Sin ningún álbum publicado: el visitante merece una salida,
+               no un callejón. Lo mandamos a WhatsApp, que es la conversión. */
+            <div className="portfolio__empty">
+              <Icon name="camera" size={34} />
+              <h2>El portafolio se está armando</h2>
+              <p>
+                Estoy seleccionando y preparando los álbumes de mis últimos eventos. Mientras
+                tanto, escríbeme y te muestro trabajos parecidos al tuyo.
+              </p>
+              <div className="portfolio__empty-actions">
+                {wa && (
+                  <a href={wa} className="btn btn--primary" target="_blank" rel="noopener noreferrer">
+                    <Icon name="whatsapp" size={18} />
+                    Pedir ejemplos por WhatsApp
+                  </a>
+                )}
+                <Link to="/contacto" className="btn btn--ghost">
+                  Escribirme
+                </Link>
+              </div>
+            </div>
+          ) : visible.length === 0 ? (
             <div className="portfolio__empty">
               <Icon name="images" size={34} />
               <h2>Todavía no hay álbumes en esta categoría</h2>
