@@ -1,0 +1,12 @@
+{
+  "name": "sebastian-sisa-scripts",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Utilidades de build: optimizacion de las imagenes publicas del sitio antiguo",
+  "scripts": {
+    "optimize": "node optimize-images.cjs"
+  },
+  "dependencies": {
+    "sharp": "0.33.5"
+  }
+}

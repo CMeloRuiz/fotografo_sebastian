@@ -1,0 +1,100 @@
+.process {
+  background-color: var(--color-surface);
+}
+
+.process__points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--space-5);
+  margin-bottom: var(--space-9);
+}
+
+.process__point {
+  padding: var(--space-5);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: border-color var(--t) var(--ease-out), transform var(--t) var(--ease-out);
+}
+
+.process__point:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+}
+
+.process__point-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+
+.process__point h3 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+
+.process__point p {
+  color: var(--color-text-subtle);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+/* ── Pasos del proceso ──────────────────────────────────── */
+
+.process__steps-header {
+  text-align: center;
+  margin-bottom: var(--space-7);
+}
+
+.process__steps-title {
+  font-size: var(--text-2xl);
+  margin-top: var(--space-2);
+}
+
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-6) var(--space-5);
+  counter-reset: step;
+}
+
+.process__step {
+  position: relative;
+  padding-top: var(--space-5);
+  border-top: 2px solid var(--color-border);
+}
+
+/* Punto verde sobre la linea, como marca de avance del proceso */
+.process__step::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+}
+
+.process__step-n {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-accent);
+}
+
+.process__step h4 {
+  font-size: var(--text-lg);
+  margin-block: var(--space-2);
+}
+
+.process__step p {
+  color: var(--color-text-subtle);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}

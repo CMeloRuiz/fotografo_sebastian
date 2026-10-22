@@ -1,0 +1,73 @@
+.about {
+  background-color: var(--color-bg);
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 1rem + 5vw, 5rem);
+  align-items: center;
+}
+
+.about__title {
+  font-size: var(--text-3xl);
+  margin-block: var(--space-3) var(--space-5);
+}
+
+.about__intro {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+
+.about__text p:not(.eyebrow):not(.about__intro) {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+  max-width: 60ch;
+}
+
+.about__cta {
+  margin-top: var(--space-3);
+}
+
+/*
+ * El marco verde desplazado del sitio original, pero sin romper el flujo:
+ * va como pseudoelemento del contenedor y la foto se apoya encima.
+ */
+.about__media {
+  position: relative;
+  max-width: 460px;
+  justify-self: center;
+  width: 100%;
+}
+
+.about__media::before {
+  content: '';
+  position: absolute;
+  inset: -18px -18px 18px 18px;
+  border: 3px solid var(--color-accent);
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+
+.about__media .smart-image {
+  border-radius: var(--radius);
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__media {
+    order: -1;
+    max-width: 380px;
+  }
+
+  .about__media::before {
+    inset: -12px -12px 12px 12px;
+  }
+}

@@ -1,0 +1,94 @@
+.featured {
+  background-color: var(--color-surface);
+}
+
+.featured__notice {
+  display: flex;
+  justify-content: center;
+}
+
+.featured__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+/*
+ * Ritmo editorial: dos celdas de cada seis ocupan el doble, para que la
+ * rejilla no parezca una plantilla de miniaturas iguales.
+ */
+.featured__cell--1,
+.featured__cell--5 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.featured__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.featured__item .smart-image {
+  height: 100%;
+}
+
+.featured__item img {
+  transition: transform 700ms var(--ease-out);
+}
+
+.featured__item:hover img,
+.featured__item:focus-visible img {
+  transform: scale(1.05);
+}
+
+.featured__zoom {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-text);
+  background: rgba(10, 10, 10, 0.45);
+  opacity: 0;
+  transition: opacity var(--t) var(--ease-out);
+}
+
+.featured__item:hover .featured__zoom,
+.featured__item:focus-visible .featured__zoom {
+  opacity: 1;
+}
+
+.featured__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-7);
+}
+
+/* Las celdas grandes se vuelven cuadradas: en movil estorban mas que suman */
+@media (max-width: 900px) {
+  .featured__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .featured__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+
+  .featured__cell--1,
+  .featured__cell--5 {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .featured__cell--1 .smart-image,
+  .featured__cell--5 .smart-image {
+    aspect-ratio: 16 / 10 !important;
+  }
+}

@@ -1,0 +1,373 @@
+{
+  "hero": {
+    "alt": "Pareja fotografiada a contraluz durante un evento social",
+    "role": "hero",
+    "width": 1920,
+    "height": 2880,
+    "aspectRatio": 0.6667,
+    "lqip": "data:image/webp;base64,UklGRroAAABXRUJQVlA4IK4AAABQBQCdASoUAB4APwFsr1ErJaQisBgIAWAgCUAYZoG5ovli+629R+3Gnnvs38IgMmNATAAA/u6hVwtgawPqS9vso5wT8J/05etQzUG2qrfSUW5EJU4Kfpx2DXuCpUn0M9LX/eD0gHV28+WE98rz3xYd3IybBidRtn4T2bnhcPGd+gV90boEHwX1+Svy872nAjRR3x9zMNoLmMcOGVzAqWjVPoYiZMuHjvOp9G2AAAA=",
+    "fallback": "/media/hero-1920.jpg",
+    "avif": [
+      {
+        "w": 480,
+        "url": "/media/hero-480.avif"
+      },
+      {
+        "w": 640,
+        "url": "/media/hero-640.avif"
+      },
+      {
+        "w": 800,
+        "url": "/media/hero-800.avif"
+      },
+      {
+        "w": 1200,
+        "url": "/media/hero-1200.avif"
+      },
+      {
+        "w": 1920,
+        "url": "/media/hero-1920.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "url": "/media/hero-480.webp"
+      },
+      {
+        "w": 640,
+        "url": "/media/hero-640.webp"
+      },
+      {
+        "w": 800,
+        "url": "/media/hero-800.webp"
+      },
+      {
+        "w": 1200,
+        "url": "/media/hero-1200.webp"
+      },
+      {
+        "w": 1920,
+        "url": "/media/hero-1920.webp"
+      }
+    ]
+  },
+  "portrait": {
+    "alt": "Sebastian Sisa, fotografo, con su camara",
+    "role": "portrait",
+    "width": 1920,
+    "height": 2880,
+    "aspectRatio": 0.6666,
+    "lqip": "data:image/webp;base64,UklGRroAAABXRUJQVlA4IK4AAABQBQCdASoUAB4APwFyr1KrJqQiqAqpYCAJYwDA3DT1Kgkqotye/czmarCAbQ4ZcLfUPQAA/vVyugp3dY8jdHbZJOWBKawPOVthJrasf0L39SvptURiSmh8PqWLPG5ZxsesO0OAbrtP6NIK9go2N2tCMmvaEg+RfNsiIC/wUWsTpRP5gFNijhJIV6hX6OltRsVMbfXB8FbA2iiUHP3ixf95w424T9NMvlqDeYGgAAA=",
+    "fallback": "/media/portrait-1920.jpg",
+    "avif": [
+      {
+        "w": 480,
+        "url": "/media/portrait-480.avif"
+      },
+      {
+        "w": 640,
+        "url": "/media/portrait-640.avif"
+      },
+      {
+        "w": 800,
+        "url": "/media/portrait-800.avif"
+      },
+      {
+        "w": 1200,
+        "url": "/media/portrait-1200.avif"
+      },
+      {
+        "w": 1920,
+        "url": "/media/portrait-1920.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "url": "/media/portrait-480.webp"
+      },
+      {
+        "w": 640,
+        "url": "/media/portrait-640.webp"
+      },
+      {
+        "w": 800,
+        "url": "/media/portrait-800.webp"
+      },
+      {
+        "w": 1200,
+        "url": "/media/portrait-1200.webp"
+      },
+      {
+        "w": 1920,
+        "url": "/media/portrait-1920.webp"
+      }
+    ]
+  },
+  "portraitAlt": {
+    "alt": "Sebastian Sisa durante una sesion de fotos",
+    "role": "portrait",
+    "width": 1920,
+    "height": 2880,
+    "aspectRatio": 0.6667,
+    "lqip": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAACQBQCdASoUAB4APwFwslIrJiSiqAqpYCAJYwDI9L/guST9cR/T/oafiY5PZI0YjMqL0DJ+7AD+6mqB6HXyREugonDtNjtu5unZSGKFU0hjzJQt0F/cntXuhcnhS6H01y6hHzABfprF+ZpGdKp0t1TdKuw/QRyenwuglobB6ZWqJihKttiZxZVmW0eSVSiiSAhcDdA+Elotccmofgy+rqdeZLiRugAA",
+    "fallback": "/media/portraitAlt-1920.jpg",
+    "avif": [
+      {
+        "w": 480,
+        "url": "/media/portraitAlt-480.avif"
+      },
+      {
+        "w": 640,
+        "url": "/media/portraitAlt-640.avif"
+      },
+      {
+        "w": 800,
+        "url": "/media/portraitAlt-800.avif"
+      },
+      {
+        "w": 1200,
+        "url": "/media/portraitAlt-1200.avif"
+      },
+      {
+        "w": 1920,
+        "url": "/media/portraitAlt-1920.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "url": "/media/portraitAlt-480.webp"
+      },
+      {
+        "w": 640,
+        "url": "/media/portraitAlt-640.webp"
+      },
+      {
+        "w": 800,
+        "url": "/media/portraitAlt-800.webp"
+      },
+      {
+        "w": 1200,
+        "url": "/media/portraitAlt-1200.webp"
+      },
+      {
+        "w": 1920,
+        "url": "/media/portraitAlt-1920.webp"
+      }
+    ]
+  },
+  "serviceEvents": {
+    "alt": "Celebracion de un evento social registrada en fotografia",
+    "role": "service",
+    "width": 1920,
+    "height": 1282,
+    "aspectRatio": 1.4979,
+    "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAAAwBACdASoUAA0APwFqrU8rJaQiMAgBYCAJYwCdMvIlshe7uCcCRwp1wAAA/uvhuZ2t4U8hVNyh+Xlj2pY2Gea59PjW34yF42Kqw1Fa78o77mo4r9I4a+e6cDXI/SuaT16AD2rpcmMypq0mLvnrfXnpjFTregAA",
+    "fallback": "/media/serviceEvents-1920.jpg",
+    "avif": [
+      {
+        "w": 480,
+        "url": "/media/serviceEvents-480.avif"
+      },
+      {
+        "w": 640,
+        "url": "/media/serviceEvents-640.avif"
+      },
+      {
+        "w": 800,
+        "url": "/media/serviceEvents-800.avif"
+      },
+      {
+        "w": 1200,
+        "url": "/media/serviceEvents-1200.avif"
+      },
+      {
+        "w": 1920,
+        "url": "/media/serviceEvents-1920.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "url": "/media/serviceEvents-480.webp"
+      },
+      {
+        "w": 640,
+        "url": "/media/serviceEvents-640.webp"
+      },
+      {
+        "w": 800,
+        "url": "/media/serviceEvents-800.webp"
+      },
+      {
+        "w": 1200,
+        "url": "/media/serviceEvents-1200.webp"
+      },
+      {
+        "w": 1920,
+        "url": "/media/serviceEvents-1920.webp"
+      }
+    ]
+  },
+  "serviceVideo": {
+    "alt": "Camara de video grabando durante una produccion",
+    "role": "service",
+    "width": 1920,
+    "height": 1076,
+    "aspectRatio": 1.7841,
+    "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAAAwBACdASoUAAsAPwFqrE6rJiQiMAgBYCAJYgC7MoCGAB4Cu2noBrlvMJQA/rp7VGpXX5gqY+5XB6FCGn2crcramDaNUBjaN7pgQuASdImlH2cZCLMZveeU0+n4rqkkHmsYoP34SGzJdfahHsQ5r4eubsRjG4AA",
+    "fallback": "/media/serviceVideo-1920.jpg",
+    "avif": [
+      {
+        "w": 480,
+        "url": "/media/serviceVideo-480.avif"
+      },
+      {
+        "w": 640,
+        "url": "/media/serviceVideo-640.avif"
+      },
+      {
+        "w": 800,
+        "url": "/media/serviceVideo-800.avif"
+      },
+      {
+        "w": 1200,
+        "url": "/media/serviceVideo-1200.avif"
+      },
+      {
+        "w": 1920,
+        "url": "/media/serviceVideo-1920.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "url": "/media/serviceVideo-480.webp"
+      },
+      {
+        "w": 640,
+        "url": "/media/serviceVideo-640.webp"
+      },
+      {
+        "w": 800,
+        "url": "/media/serviceVideo-800.webp"
+      },
+      {
+        "w": 1200,
+        "url": "/media/serviceVideo-1200.webp"
+      },
+      {
+        "w": 1920,
+        "url": "/media/serviceVideo-1920.webp"
+      }
+    ]
+  },
+  "servicePortrait": {
+    "alt": "Retrato de estudio con iluminacion suave",
+    "role": "service",
+    "width": 1920,
+    "height": 1280,
+    "aspectRatio": 1.5002,
+    "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAADQAwCdASoUAA0APwFqrU8rJiQiMAgBYCAJQBUehC8bZlkHC48UTAAA9hPLd2YAOLFZ2Uo4p1mpNza9YxhNtmfZ/dWEt68dUvaK55cznQ1ge57Sufkn2fmSYa7lIXJgv17WJA2w1+P+kMN6wwwsS2i4B/CAAAAA",
+    "fallback": "/media/servicePortrait-1920.jpg",
+    "avif": [
+      {
+        "w": 480,
+        "url": "/media/servicePortrait-480.avif"
+      },
+      {
+        "w": 640,
+        "url": "/media/servicePortrait-640.avif"
+      },
+      {
+        "w": 800,
+        "url": "/media/servicePortrait-800.avif"
+      },
+      {
+        "w": 1200,
+        "url": "/media/servicePortrait-1200.avif"
+      },
+      {
+        "w": 1920,
+        "url": "/media/servicePortrait-1920.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "url": "/media/servicePortrait-480.webp"
+      },
+      {
+        "w": 640,
+        "url": "/media/servicePortrait-640.webp"
+      },
+      {
+        "w": 800,
+        "url": "/media/servicePortrait-800.webp"
+      },
+      {
+        "w": 1200,
+        "url": "/media/servicePortrait-1200.webp"
+      },
+      {
+        "w": 1920,
+        "url": "/media/servicePortrait-1920.webp"
+      }
+    ]
+  },
+  "serviceCommercial": {
+    "alt": "Fotografia comercial de producto en estudio",
+    "role": "service",
+    "width": 1920,
+    "height": 1281,
+    "aspectRatio": 1.4984,
+    "lqip": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAQBACdASoUAA0APwFqrU8rJiQiMAgBYCAJZQDE2CFN4EOuZcDtTq75AADgE/qI3wggcqIElEoVCQGzq2EB3yJ8t2nQhZ7+cfuGO+EQFSiS6cV4794xCf8pMBm15WoW6bIAItrvBUktAosHfAAAAA==",
+    "fallback": "/media/serviceCommercial-1920.jpg",
+    "avif": [
+      {
+        "w": 480,
+        "url": "/media/serviceCommercial-480.avif"
+      },
+      {
+        "w": 640,
+        "url": "/media/serviceCommercial-640.avif"
+      },
+      {
+        "w": 800,
+        "url": "/media/serviceCommercial-800.avif"
+      },
+      {
+        "w": 1200,
+        "url": "/media/serviceCommercial-1200.avif"
+      },
+      {
+        "w": 1920,
+        "url": "/media/serviceCommercial-1920.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "url": "/media/serviceCommercial-480.webp"
+      },
+      {
+        "w": 640,
+        "url": "/media/serviceCommercial-640.webp"
+      },
+      {
+        "w": 800,
+        "url": "/media/serviceCommercial-800.webp"
+      },
+      {
+        "w": 1200,
+        "url": "/media/serviceCommercial-1200.webp"
+      },
+      {
+        "w": 1920,
+        "url": "/media/serviceCommercial-1920.webp"
+      }
+    ]
+  }
+}

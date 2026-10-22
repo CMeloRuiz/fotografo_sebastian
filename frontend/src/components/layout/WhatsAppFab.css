@@ -1,0 +1,64 @@
+.wa-fab {
+  position: fixed;
+  right: clamp(1rem, 2vw, 2rem);
+  bottom: clamp(1rem, 2vw, 2rem);
+  z-index: var(--z-fab);
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 58px;
+  padding-inline: 16px;
+  border-radius: var(--radius-full);
+
+  background-color: #25d366;
+  color: #072b16;
+  box-shadow: var(--shadow);
+
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  pointer-events: none;
+  transition: opacity var(--t) var(--ease-out),
+              transform var(--t) var(--ease-out),
+              padding var(--t) var(--ease-out);
+}
+
+.wa-fab.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.wa-fab svg { flex-shrink: 0; }
+
+.wa-fab__label {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  /* Oculta por ancho para poder animar la apertura al pasar el cursor */
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-width var(--t) var(--ease-out), opacity var(--t) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .wa-fab:hover .wa-fab__label,
+  .wa-fab:focus-visible .wa-fab__label {
+    max-width: 220px;
+    opacity: 1;
+  }
+}
+
+/* En tactil se queda como boton circular: no hay hover que lo despliegue */
+@media (hover: none) {
+  .wa-fab {
+    width: 58px;
+    padding-inline: 0;
+    justify-content: center;
+  }
+}

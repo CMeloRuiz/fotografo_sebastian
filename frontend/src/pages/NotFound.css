@@ -1,0 +1,29 @@
+.notfound {
+  min-height: 70svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-top: calc(var(--header-h) + var(--space-7));
+  padding-bottom: var(--space-8);
+}
+
+.notfound h1 {
+  font-size: var(--text-4xl);
+  margin-block: var(--space-3) var(--space-4);
+}
+
+.notfound .lead {
+  margin-inline: auto;
+  margin-bottom: var(--space-6);
+}
+
+.notfound__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+@media (max-width: 560px) {
+  .notfound__actions .btn { flex: 1 1 100%; }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f0f0f" />
+
+    <title>Sebastián Sisa | Fotografía y video para eventos en Villapinzón</title>
+    <meta
+      name="description"
+      content="Fotógrafo y filmmaker de matrimonios, quince años, bautizos y eventos musicales en Villapinzón y Cundinamarca. Mira el portafolio y cotiza por WhatsApp."
+    />
+
+    <link rel="icon" type="image/png" href="/media/favicon.png" />
+    <link rel="apple-touch-icon" href="/media/favicon.png" />
+
+    <!--
+      Fuentes autoalojadas y precargadas.
+      El sitio antiguo encadenaba cuatro @import a fonts.googleapis.com dentro
+      del CSS, asi que el navegador tenia que descargar y parsear la hoja antes
+      de descubrir siquiera las fuentes: 3,4 s de render bloqueado. Ahora solo
+      se precargan los dos archivos latinos que de verdad usa la pagina.
+    -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/oswald-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/outfit-latin.woff2" crossorigin />
+
+    <!--
+      La imagen del hero es el LCP. Se precarga en AVIF: los navegadores que no
+      soportan el tipo ignoran esta linea y la descubren por el <picture>.
+    -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset="/media/hero-480.avif 480w, /media/hero-640.avif 640w, /media/hero-800.avif 800w, /media/hero-1200.avif 1200w, /media/hero-1920.avif 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "additionalType": "https://schema.org/Photograph",
+        "name": "Sebastián Sisa",
+        "description": "Fotografía y filmmaking para eventos sociales y publicidad en Villapinzón y Cundinamarca.",
+        "image": "/media/hero-1200.jpg",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Parque Principal",
+          "addressLocality": "Villapinzón",
+          "addressRegion": "Cundinamarca",
+          "addressCountry": "CO"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 5.2158,
+          "longitude": -73.5953
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        ],
+        "areaServed": [
+          { "@type": "City", "name": "Villapinzón" },
+          { "@type": "AdministrativeArea", "name": "Cundinamarca" }
+        ],
+        "knowsAbout": [
+          "Fotografía de matrimonios",
+          "Fotografía de quince años",
+          "Fotografía de bautizos",
+          "Videoclips musicales",
+          "Fotografía comercial"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      Este sitio necesita JavaScript para mostrar el portafolio. Puedes escribir directamente
+      por WhatsApp al +57 321 123 4567.
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

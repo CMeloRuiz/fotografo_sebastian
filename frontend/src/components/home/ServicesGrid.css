@@ -1,0 +1,115 @@
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-5);
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--t) var(--ease-out), transform var(--t) var(--ease-out);
+}
+
+.service-card:hover {
+  border-color: rgba(182, 233, 37, 0.4);
+  transform: translateY(-6px);
+}
+
+.service-card__media {
+  position: relative;
+}
+
+.service-card__media img {
+  transition: transform 700ms var(--ease-out);
+}
+
+.service-card:hover .service-card__media img {
+  transform: scale(1.06);
+}
+
+.service-card__icon {
+  position: absolute;
+  right: var(--space-5);
+  bottom: -23px;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  box-shadow: var(--shadow-sm);
+  transition: transform 600ms var(--ease-out);
+}
+
+.service-card:hover .service-card__icon {
+  transform: rotate(360deg);
+}
+
+.service-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-6) var(--space-5) var(--space-5);
+}
+
+.service-card__body h3 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-3);
+  padding-right: var(--space-7);
+}
+
+.service-card__desc {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+}
+
+.service-card__features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.service-card__features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.service-card__features svg {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.service-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  /* Empuja el pie al fondo para que todas las tarjetas lo alineen */
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.service-card__price {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.service-card__cta {
+  padding: 0.6rem 1.2rem;
+  min-height: 42px;
+}

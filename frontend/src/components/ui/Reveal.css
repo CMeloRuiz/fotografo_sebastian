@@ -1,0 +1,25 @@
+.reveal {
+  opacity: 0;
+  transition: opacity var(--t-slow) var(--ease-out), transform var(--t-slow) var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal--up { transform: translateY(32px); }
+.reveal--left { transform: translateX(-32px); }
+.reveal--right { transform: translateX(32px); }
+.reveal--fade { transform: none; }
+.reveal--zoom { transform: scale(0.96); }
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  /* Soltar will-change cuando ya revelo evita retener capas de composicion */
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

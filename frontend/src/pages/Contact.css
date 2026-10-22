@@ -1,0 +1,215 @@
+.contact {
+  background-color: var(--color-bg);
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(2rem, 1rem + 4vw, 4.5rem);
+  align-items: start;
+}
+
+.contact__info h2,
+.contact__form h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-6);
+}
+
+.contact__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.contact__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.contact__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.contact__list h3 {
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-subtle);
+  margin-bottom: 2px;
+}
+
+.contact__list p {
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.contact__list a:hover { color: var(--color-accent); }
+
+.contact__wa { width: 100%; }
+
+.contact__note {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+/* ── Formulario ─────────────────────────────────────────── */
+
+.contact__form,
+.contact__success {
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.field label {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+}
+
+.field__optional {
+  color: var(--color-text-faint);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  /* 48px de alto minimo: comodo para el pulgar en movil */
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  transition: border-color var(--t) var(--ease-out), background-color var(--t) var(--ease-out);
+  /* 16px evita que iOS haga zoom al enfocar el campo */
+  font-size: 16px;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.6;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-2);
+}
+
+.field input[aria-invalid='true'],
+.field select[aria-invalid='true'],
+.field textarea[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+/* El selector de fecha nativo es casi invisible en fondo oscuro */
+.field input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.field__error {
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+.contact__server-error {
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  background-color: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  border-radius: var(--radius-sm);
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+}
+
+.contact__submit {
+  width: 100%;
+}
+
+.contact__submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+  transform: none;
+}
+
+/* ── Exito ──────────────────────────────────────────────── */
+
+.contact__success {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.contact__success-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.contact__success h2 { margin-bottom: 0; }
+
+.contact__success p {
+  color: var(--color-text-muted);
+  max-width: 44ch;
+}
+
+/* ── Mapa ───────────────────────────────────────────────── */
+
+.contact__map iframe {
+  display: block;
+  border: 0;
+  /* El mapa de Google llega claro y rompe el tono del sitio */
+  filter: grayscale(0.9) invert(0.92) contrast(0.85);
+}
+
+@media (max-width: 900px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

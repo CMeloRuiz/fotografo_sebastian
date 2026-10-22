@@ -1,0 +1,54 @@
+.cta-banner {
+  position: relative;
+  padding-block: clamp(4rem, 2rem + 9vw, 8rem);
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+.cta-banner__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.cta-banner__media .smart-image {
+  height: 100%;
+}
+
+.cta-banner__media img {
+  /* Casi monocroma, para que el texto mande y la foto solo ambiente */
+  filter: grayscale(0.55) brightness(0.4);
+}
+
+.cta-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.93));
+}
+
+.cta-banner h2 {
+  font-size: var(--text-4xl);
+  margin-block: var(--space-3) var(--space-4);
+  text-wrap: balance;
+}
+
+.cta-banner .lead {
+  margin-inline: auto;
+  margin-bottom: var(--space-6);
+}
+
+.cta-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+@media (max-width: 600px) {
+  .cta-banner__actions .btn {
+    flex: 1 1 100%;
+  }
+}

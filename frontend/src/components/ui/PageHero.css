@@ -1,0 +1,55 @@
+.page-hero {
+  position: relative;
+  padding-top: calc(var(--header-h) + var(--space-7));
+  padding-bottom: var(--space-7);
+  background-color: var(--color-bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Cuña verde inclinada, el gesto grafico que ya traia el sitio */
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -6%;
+  width: 420px;
+  height: 420px;
+  background-color: var(--color-accent);
+  opacity: 0.07;
+  transform: skewX(-26deg);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.page-hero__title {
+  font-size: var(--text-4xl);
+  margin-top: var(--space-3);
+  position: relative;
+  display: inline-block;
+  text-wrap: balance;
+}
+
+.page-hero__title::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin-top: var(--space-4);
+  background-color: var(--color-accent);
+}
+
+.page-hero__lead {
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 600px) {
+  .page-hero {
+    padding-top: calc(var(--header-h) + var(--space-5));
+  }
+
+  .page-hero::before {
+    width: 260px;
+    height: 260px;
+  }
+}

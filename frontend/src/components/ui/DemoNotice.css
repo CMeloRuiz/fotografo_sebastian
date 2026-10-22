@@ -1,0 +1,27 @@
+.demo-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-5);
+
+  background-color: var(--color-accent-soft);
+  border: 1px dashed rgba(182, 233, 37, 0.45);
+  border-radius: var(--radius-full);
+
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+  text-align: left;
+}
+
+.demo-notice svg { flex-shrink: 0; }
+
+@media (max-width: 560px) {
+  .demo-notice {
+    border-radius: var(--radius);
+    align-items: flex-start;
+  }
+
+  .demo-notice svg { margin-top: 2px; }
+}

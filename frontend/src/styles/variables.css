@@ -1,0 +1,96 @@
+/*
+ * Tokens de marca de Sebastian Sisa.
+ * La paleta sale tal cual del CSS del sitio original: el verde lima #B6E925
+ * sobre negro #0f0f0f es la identidad y no se toca. Lo que se agrega son los
+ * grises intermedios y las escalas de espaciado y tipografia que antes
+ * estaban repetidas a mano en cada archivo.
+ */
+:root {
+  /* Marca */
+  --color-accent: #b6e925;
+  --color-accent-dark: #93bd1c;
+  --color-accent-soft: rgba(182, 233, 37, 0.12);
+  --color-accent-contrast: #0f0f0f;
+
+  /* Superficies */
+  --color-bg: #0f0f0f;
+  --color-surface: #161616;
+  --color-surface-2: #212121;
+  --color-surface-3: #2b2b2b;
+  --color-overlay: rgba(15, 15, 15, 0.76);
+
+  /* Texto */
+  --color-text: #ffffff;
+  --color-text-muted: #d8d8d8;
+  --color-text-subtle: #969696;
+  /* #8a8a8a es el gris mas apagado que todavia pasa 4.5:1 sobre #0b0b0b */
+  --color-text-faint: #8a8a8a;
+
+  /* Lineas */
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+
+  /* Estados */
+  --color-success: #4ade80;
+  --color-danger: #f87171;
+  --color-warning: #fbbf24;
+
+  /* Tipografia */
+  --font-display: "Oswald", "Impact", sans-serif;
+  --font-body: "Outfit", "Segoe UI", system-ui, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  --text-3xl: clamp(1.9rem, 1.4rem + 2.4vw, 2.75rem);
+  --text-4xl: clamp(2.4rem, 1.6rem + 3.6vw, 4rem);
+  --text-hero: clamp(2.6rem, 1.4rem + 5.4vw, 5.5rem);
+
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.18em;
+
+  /* Espaciado */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --section-y: clamp(3.5rem, 2rem + 7vw, 7.5rem);
+  --gutter: clamp(1rem, 0.4rem + 2.6vw, 4.375rem);
+
+  /* Medidas */
+  --container: 1240px;
+  --container-narrow: 820px;
+  --header-h: 84px;
+  --header-h-compact: 62px;
+
+  /* Formas */
+  --radius-sm: 4px;
+  --radius: 10px;
+  --radius-lg: 18px;
+  --radius-full: 999px;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.5);
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 160ms;
+  --t: 280ms;
+  --t-slow: 620ms;
+
+  --z-header: 900;
+  --z-fab: 940;
+  --z-menu: 960;
+  --z-lightbox: 980;
+  --z-toast: 1000;
+}

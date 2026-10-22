@@ -1,0 +1,198 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  transition: background-color var(--t) var(--ease-out),
+              box-shadow var(--t) var(--ease-out),
+              backdrop-filter var(--t) var(--ease-out);
+}
+
+.header.is-compact,
+.header.is-open {
+  background-color: rgba(15, 15, 15, 0.82);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--color-border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  height: var(--header-h);
+  padding-inline: var(--gutter);
+  max-width: 1600px;
+  margin-inline: auto;
+  transition: height var(--t) var(--ease-out);
+}
+
+.header.is-compact .header__inner {
+  height: var(--header-h-compact);
+}
+
+.header__logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.header__logo img {
+  width: auto;
+  height: 52px;
+  transition: height var(--t) var(--ease-out);
+}
+
+.header.is-compact .header__logo img {
+  height: 40px;
+}
+
+/* ── Navegacion de escritorio ───────────────────────────── */
+
+.header__nav ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 0.5rem + 1.8vw, 2.5rem);
+}
+
+.header__nav a {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding-block: var(--space-2);
+  transition: color var(--t) var(--ease-out);
+}
+
+.header__nav a:hover {
+  color: var(--color-text);
+}
+
+/* Subrayado que crece desde el centro: el acento verde de la marca */
+.header__nav a:not(.header__cta)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform: translateX(-50%);
+  transition: width var(--t) var(--ease-out);
+}
+
+.header__nav a:hover::after,
+.header__nav a.is-active::after {
+  width: 100%;
+}
+
+.header__nav a.is-active {
+  color: var(--color-text);
+}
+
+.header__cta {
+  padding: 0.65rem 1.5rem;
+  min-height: 42px;
+}
+
+.header__cta::after { display: none; }
+
+/* ── Boton hamburguesa ──────────────────────────────────── */
+
+.header__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  margin-right: -12px;
+}
+
+.header__burger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition: transform var(--t) var(--ease-out), opacity var(--t-fast) var(--ease-out);
+}
+
+/* Las dos barras exteriores se cruzan y la del medio se desvanece */
+.header.is-open .header__burger span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.header.is-open .header__burger span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.4);
+}
+
+.header.is-open .header__burger span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ── Menu movil ─────────────────────────────────────────── */
+
+.header__mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .header__nav { display: none; }
+  .header__burger { display: flex; }
+
+  .header__mobile {
+    display: block;
+    border-top: 1px solid var(--color-border);
+    background-color: rgba(15, 15, 15, 0.97);
+    backdrop-filter: blur(16px);
+    max-height: calc(100dvh - var(--header-h-compact));
+    overflow-y: auto;
+  }
+
+  .header__mobile[hidden] { display: none; }
+
+  .header__mobile ul {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4) var(--gutter) var(--space-7);
+  }
+
+  .header__mobile li {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fade-up var(--t) var(--ease-out) forwards;
+    animation-delay: inherit;
+  }
+
+  .header__mobile a {
+    display: block;
+    padding: var(--space-4) 0;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header__mobile a.is-active {
+    color: var(--color-accent);
+  }
+
+  .header__mobile-cta {
+    margin-top: var(--space-5);
+    width: 100%;
+    border-bottom: none !important;
+    color: var(--color-accent-contrast) !important;
+    font-size: var(--text-base) !important;
+  }
+}
+
+/* El menu movil hereda el retardo escalonado de cada <li> */
+.header__mobile li { animation-delay: inherit; }

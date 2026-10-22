@@ -1,0 +1,15 @@
+.route-fallback {
+  min-height: 70svh;
+  display: grid;
+  place-items: center;
+  background-color: var(--color-bg);
+}
+
+.route-fallback__spinner {
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--color-border-strong);
+  border-top-color: var(--color-accent);
+  border-radius: var(--radius-full);
+  animation: spin 760ms linear infinite;
+}

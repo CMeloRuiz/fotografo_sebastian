@@ -1,0 +1,151 @@
+.portfolio__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0.55rem 1.1rem;
+
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition: color var(--t) var(--ease-out),
+              border-color var(--t) var(--ease-out),
+              background-color var(--t) var(--ease-out);
+}
+
+.filter-pill:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+.filter-pill.is-active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.filter-pill__count {
+  font-size: var(--text-xs);
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Rejilla de albumes ─────────────────────────────────── */
+
+.portfolio__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-5);
+}
+
+.album-card {
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--color-surface-2);
+}
+
+.album-card__media {
+  position: absolute;
+  inset: 0;
+}
+
+.album-card__media .smart-image { height: 100%; }
+
+.album-card__media img {
+  transition: transform 800ms var(--ease-out), filter 500ms var(--ease-out);
+  filter: brightness(0.8);
+}
+
+.album-card:hover .album-card__media img,
+.album-card:focus-visible .album-card__media img {
+  transform: scale(1.05);
+  filter: brightness(0.95);
+}
+
+.album-card__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 3 / 4;
+  padding: var(--space-5);
+  background: linear-gradient(to top, rgba(8, 8, 8, 0.93) 10%, rgba(8, 8, 8, 0.2) 55%, transparent 80%);
+}
+
+.album-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+/* Punto separador entre categoria y fecha */
+.album-card__meta span + span::before {
+  content: '·';
+  margin-right: var(--space-2);
+  color: var(--color-text-faint);
+}
+
+.album-card__body h2 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-3);
+  text-wrap: balance;
+}
+
+.album-card__count {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.album-card__count svg {
+  transition: transform var(--t) var(--ease-out);
+}
+
+.album-card:hover .album-card__count svg {
+  transform: translateX(4px);
+  color: var(--color-accent);
+}
+
+/* ── Vacio ──────────────────────────────────────────────── */
+
+.portfolio__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  padding: var(--space-9) var(--space-4);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-subtle);
+}
+
+.portfolio__empty svg { color: var(--color-text-faint); }
+
+.portfolio__empty h2 { font-size: var(--text-xl); color: var(--color-text); }
+
+.portfolio__empty p { font-size: var(--text-sm); }
