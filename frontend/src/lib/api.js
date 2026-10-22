@@ -53,6 +53,52 @@ export async function request(path, { method = 'GET', body, signal, headers = {}
   return data;
 }
 
+/**
+ * Subida con barra de progreso.
+ *
+ * fetch() no informa del avance de la subida, y para el fotografo mandando
+ * 20 fotos desde el celular esa barra es la diferencia entre esperar
+ * tranquilo y pensar que la aplicacion se colgo. Por eso aqui, y solo aqui,
+ * usamos XMLHttpRequest.
+ */
+export function uploadWithProgress(path, formData, onProgress) {
+  return new Promise((resolve, reject) => {
+    if (!BASE) {
+      reject(new ApiError('No hay backend configurado', 0, null));
+      return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `${BASE}${path}`);
+    xhr.withCredentials = true;
+
+    xhr.upload.addEventListener('progress', (event) => {
+      if (event.lengthComputable && onProgress) {
+        onProgress(Math.round((event.loaded / event.total) * 100));
+      }
+    });
+
+    xhr.addEventListener('load', () => {
+      let data = null;
+      try {
+        data = JSON.parse(xhr.responseText);
+      } catch {
+        data = xhr.responseText;
+      }
+
+      if (xhr.status >= 200 && xhr.status < 300) resolve(data);
+      else reject(new ApiError(data?.error || `Error ${xhr.status}`, xhr.status, data));
+    });
+
+    xhr.addEventListener('error', () =>
+      reject(new ApiError('No hay conexión con el servidor.', 0, null)),
+    );
+    xhr.addEventListener('abort', () => reject(new ApiError('Subida cancelada.', 0, null)));
+
+    xhr.send(formData);
+  });
+}
+
 export const api = {
   get: (path, options) => request(path, { ...options, method: 'GET' }),
   post: (path, body, options) => request(path, { ...options, method: 'POST', body }),

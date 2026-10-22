@@ -1,0 +1,331 @@
+/*
+ * Panel de administracion.
+ *
+ * Tiene su propio lenguaje visual: mas denso, mas funcional, con la escala
+ * tipografica pequena y sin las mayusculas ni el aire editorial del sitio
+ * publico. Comparte una sola cosa con el: el verde de la marca.
+ *
+ * Los tokens se redefinen dentro de .admin para no filtrarse al sitio.
+ */
+
+.admin {
+  --admin-bg: #0c0c0d;
+  --admin-surface: #151517;
+  --admin-surface-2: #1d1d20;
+  --admin-surface-3: #26262a;
+  --admin-border: #2a2a2f;
+  --admin-border-soft: #1f1f23;
+
+  --admin-text: #f2f2f3;
+  --admin-text-muted: #a1a1a8;
+  --admin-text-faint: #76767e;
+
+  --admin-radius: 8px;
+  --admin-radius-lg: 12px;
+  --admin-sidebar-w: 248px;
+  --admin-topbar-h: 60px;
+
+  /* El panel usa la sans en todo: es una herramienta, no una portada */
+  font-family: var(--font-body);
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+  min-height: 100dvh;
+  font-size: 15px;
+}
+
+.admin h1, .admin h2, .admin h3, .admin h4 {
+  font-family: var(--font-body);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.admin h1 { font-size: 1.45rem; }
+.admin h2 { font-size: 1.15rem; }
+.admin h3 { font-size: 1rem; }
+
+/* ── Superficies ────────────────────────────────────────── */
+
+.admin-card {
+  background-color: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  padding: var(--space-5);
+}
+
+.admin-card--flush { padding: 0; overflow: hidden; }
+
+.admin-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+}
+
+.admin-hint {
+  font-size: 0.82rem;
+  color: var(--admin-text-faint);
+  line-height: 1.5;
+}
+
+/* ── Botones ────────────────────────────────────────────── */
+
+.abtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: 0 var(--space-4);
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--admin-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--t-fast) var(--ease-out),
+              border-color var(--t-fast) var(--ease-out),
+              color var(--t-fast) var(--ease-out),
+              opacity var(--t-fast) var(--ease-out);
+}
+
+.abtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.abtn--primary {
+  background-color: var(--color-accent);
+  color: #0f0f0f;
+  font-weight: 600;
+}
+.abtn--primary:hover:not(:disabled) { background-color: #c6f23c; }
+
+.abtn--secondary {
+  background-color: var(--admin-surface-2);
+  border-color: var(--admin-border);
+  color: var(--admin-text);
+}
+.abtn--secondary:hover:not(:disabled) { background-color: var(--admin-surface-3); }
+
+.abtn--ghost { color: var(--admin-text-muted); }
+.abtn--ghost:hover:not(:disabled) {
+  background-color: var(--admin-surface-2);
+  color: var(--admin-text);
+}
+
+.abtn--danger {
+  background-color: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.35);
+  color: #fca5a5;
+}
+.abtn--danger:hover:not(:disabled) {
+  background-color: var(--color-danger);
+  color: #1a0505;
+}
+
+.abtn--sm { min-height: 32px; padding: 0 var(--space-3); font-size: 0.8rem; }
+
+.abtn--icon {
+  width: 36px;
+  min-height: 36px;
+  padding: 0;
+  color: var(--admin-text-muted);
+}
+.abtn--icon:hover:not(:disabled) {
+  background-color: var(--admin-surface-3);
+  color: var(--admin-text);
+}
+
+/* ── Formularios ────────────────────────────────────────── */
+
+.afield {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: var(--space-4);
+}
+
+.afield label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--admin-text-muted);
+}
+
+.afield input[type='text'],
+.afield input[type='email'],
+.afield input[type='password'],
+.afield input[type='date'],
+.afield input[type='tel'],
+.afield input[type='url'],
+.afield select,
+.afield textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.55rem 0.75rem;
+
+  background-color: var(--admin-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  color: var(--admin-text);
+  /* 16px para que iOS no haga zoom al enfocar */
+  font-size: 16px;
+  transition: border-color var(--t-fast) var(--ease-out),
+              box-shadow var(--t-fast) var(--ease-out);
+}
+
+.afield textarea { min-height: 96px; resize: vertical; line-height: 1.6; }
+
+.afield input:focus,
+.afield select:focus,
+.afield textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(182, 233, 37, 0.15);
+}
+
+.afield input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.afield__error {
+  font-size: 0.8rem;
+  color: #fca5a5;
+}
+
+.afield-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+/* Interruptor de publicado/borrador */
+.aswitch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  user-select: none;
+  padding: var(--space-2) 0;
+}
+
+.aswitch input { position: absolute; opacity: 0; pointer-events: none; }
+
+.aswitch__track {
+  position: relative;
+  width: 40px;
+  height: 23px;
+  border-radius: var(--radius-full);
+  background-color: var(--admin-surface-3);
+  border: 1px solid var(--admin-border);
+  transition: background-color var(--t-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.aswitch__track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: var(--admin-text-faint);
+  transition: transform var(--t-fast) var(--ease-out), background-color var(--t-fast) var(--ease-out);
+}
+
+.aswitch input:checked + .aswitch__track {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.aswitch input:checked + .aswitch__track::after {
+  transform: translateX(17px);
+  background-color: #0f0f0f;
+}
+
+.aswitch input:focus-visible + .aswitch__track {
+  box-shadow: 0 0 0 3px rgba(182, 233, 37, 0.25);
+}
+
+.aswitch__label { font-size: 0.875rem; }
+
+/* ── Etiquetas de estado ────────────────────────────────── */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.badge--live {
+  background-color: rgba(182, 233, 37, 0.12);
+  border-color: rgba(182, 233, 37, 0.3);
+  color: var(--color-accent);
+}
+
+.badge--draft {
+  background-color: var(--admin-surface-3);
+  border-color: var(--admin-border);
+  color: var(--admin-text-muted);
+}
+
+.badge--demo {
+  background-color: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.3);
+  color: var(--color-warning);
+}
+
+.badge--new {
+  background-color: var(--color-accent);
+  color: #0f0f0f;
+}
+
+/* ── Estados vacios, carga y error ──────────────────────── */
+
+.astate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-5);
+  text-align: center;
+  border: 1px dashed var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  color: var(--admin-text-muted);
+}
+
+.astate svg { color: var(--admin-text-faint); }
+.astate h3 { color: var(--admin-text); }
+.astate p { font-size: 0.875rem; max-width: 46ch; line-height: 1.6; }
+
+.aspinner {
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--admin-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 720ms linear infinite;
+}
+
+/* Esqueleto de carga */
+.askeleton {
+  background: linear-gradient(90deg, var(--admin-surface-2) 25%, var(--admin-surface-3) 50%, var(--admin-surface-2) 75%);
+  background-size: 200% 100%;
+  border-radius: var(--admin-radius);
+  animation: askeleton 1.3s ease-in-out infinite;
+}
+
+@keyframes askeleton {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}

@@ -15,12 +15,14 @@ import './Hero.css';
 export default function Hero({ content }) {
   const { hero, contact } = content;
   const wa = whatsappLink(contact.whatsapp, contact.whatsappMessage);
+  // Si el fotógrafo cambió el fondo desde el panel, manda el suyo.
+  const media = content.heroMedia || images.hero;
 
   return (
     <section className="hero">
       <div className="hero__media">
         <SmartImage
-          image={images.hero}
+          image={media}
           alt="Celebración registrada por Sebastián Sisa"
           sizes="100vw"
           priority

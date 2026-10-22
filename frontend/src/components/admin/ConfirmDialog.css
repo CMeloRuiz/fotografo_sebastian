@@ -1,0 +1,60 @@
+.confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(3px);
+  animation: fade-in var(--t-fast) var(--ease-out);
+  min-height: auto;
+}
+
+.confirm {
+  width: min(420px, 100%);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  background-color: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  animation: confirm-in 200ms var(--ease-out);
+}
+
+.confirm__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto var(--space-4);
+  border-radius: 50%;
+  background-color: var(--admin-surface-3);
+  color: var(--admin-text-muted);
+}
+
+.confirm__icon.is-danger {
+  background-color: rgba(248, 113, 113, 0.12);
+  color: #fca5a5;
+}
+
+.confirm h2 { margin-bottom: var(--space-2); }
+
+.confirm p {
+  font-size: 0.88rem;
+  color: var(--admin-text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-5);
+}
+
+.confirm__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.confirm__actions .abtn { flex: 1; }
+
+@keyframes confirm-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}

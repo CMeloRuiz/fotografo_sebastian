@@ -1,0 +1,109 @@
+.dash-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.dash-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background-color: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  transition: border-color var(--t-fast) var(--ease-out),
+              transform var(--t-fast) var(--ease-out);
+}
+
+.dash-card:hover {
+  border-color: var(--admin-surface-3);
+  transform: translateY(-2px);
+}
+
+.dash-card__icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--admin-radius);
+  background-color: var(--admin-surface-3);
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.dash-card__value {
+  font-size: 1.9rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-card__skeleton {
+  display: block;
+  width: 48px;
+  height: 28px;
+}
+
+.dash-card__label {
+  font-size: 0.82rem;
+  color: var(--admin-text-faint);
+}
+
+/* ── Aviso de contenido de ejemplo ──────────────────────── */
+
+.dash-demo {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+
+  background-color: rgba(251, 191, 36, 0.07);
+  border: 1px solid rgba(251, 191, 36, 0.28);
+  border-radius: var(--admin-radius-lg);
+}
+
+.dash-demo > svg {
+  color: var(--color-warning);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.dash-demo div { flex: 1; }
+
+.dash-demo strong { display: block; margin-bottom: 4px; }
+
+.dash-demo p {
+  font-size: 0.85rem;
+  color: var(--admin-text-muted);
+  line-height: 1.6;
+}
+
+.dash-demo .abtn { flex-shrink: 0; }
+
+/* ── Últimas fotos ──────────────────────────────────────── */
+
+.dash-recent__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: var(--space-3);
+}
+
+.dash-recent__grid img,
+.dash-recent__skeleton {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--admin-radius);
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .dash-demo {
+    flex-direction: column;
+  }
+
+  .dash-demo .abtn { width: 100%; }
+}

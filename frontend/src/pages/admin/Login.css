@@ -1,0 +1,55 @@
+.login {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: var(--space-5);
+  /* Un foco verde muy tenue, lo justo para que no sea una caja sobre negro */
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(182, 233, 37, 0.07), transparent 70%),
+    var(--admin-bg);
+}
+
+.login__card {
+  width: min(400px, 100%);
+  padding: var(--space-6) var(--space-5);
+  background-color: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.login__card img {
+  height: 54px;
+  width: auto;
+  margin-bottom: var(--space-5);
+}
+
+.login__card h1 { margin-bottom: var(--space-2); }
+
+.login__lead {
+  font-size: 0.875rem;
+  color: var(--admin-text-muted);
+  line-height: 1.55;
+  margin-bottom: var(--space-6);
+}
+
+.login__password {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.login__error {
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  background-color: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: var(--admin-radius);
+  font-size: 0.85rem;
+  color: #fca5a5;
+}
+
+.login__submit {
+  width: 100%;
+  min-height: 46px;
+}

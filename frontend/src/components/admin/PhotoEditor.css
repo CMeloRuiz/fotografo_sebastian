@@ -1,0 +1,97 @@
+.photo-editor-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(3px);
+  min-height: auto;
+  overflow-y: auto;
+}
+
+.photo-editor {
+  width: min(900px, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  background-color: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.photo-editor__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--admin-border);
+  position: sticky;
+  top: 0;
+  background-color: var(--admin-surface);
+  z-index: 1;
+}
+
+.photo-editor__body {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-5);
+  padding: var(--space-5);
+}
+
+.photo-editor__preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.photo-editor__stage {
+  position: relative;
+  background-color: var(--admin-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+  /* El gesto sobre la foto es dibujar el recorte, no desplazar la página */
+  touch-action: none;
+  cursor: crosshair;
+  user-select: none;
+}
+
+.photo-editor__stage img {
+  width: 100%;
+  max-height: 46vh;
+  object-fit: contain;
+  display: block;
+  transition: transform var(--t) var(--ease-out);
+  pointer-events: none;
+}
+
+.photo-editor__crop {
+  position: absolute;
+  border: 2px solid var(--color-accent);
+  /* El velo exterior se consigue con una sombra enorme hacia fuera */
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.photo-editor__tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.photo-editor__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-editor__form .abtn--primary { margin-top: auto; }
+
+@media (max-width: 800px) {
+  .photo-editor__body {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-editor__stage img { max-height: 38vh; }
+}

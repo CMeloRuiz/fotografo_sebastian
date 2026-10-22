@@ -1,0 +1,67 @@
+.sortable {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* Mientras se arrastra, el navegador no debe seleccionar texto ni
+   interpretar el gesto como scroll */
+.sortable.is-dragging {
+  user-select: none;
+  touch-action: none;
+  cursor: grabbing;
+}
+
+.sortable__item {
+  transition: transform var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out);
+}
+
+.sortable__item.is-active {
+  opacity: 0.85;
+  transform: scale(1.015);
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
+}
+
+.sortable__handle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--admin-radius);
+  color: var(--admin-text-faint);
+  cursor: grab;
+  /* El tirador nunca debe hacer scroll: ahi el gesto es arrastrar */
+  touch-action: none;
+  background: none;
+  border: none;
+}
+
+.sortable__handle:hover {
+  background-color: var(--admin-surface-3);
+  color: var(--admin-text);
+}
+
+.sortable__handle:active { cursor: grabbing; }
+
+/* Las seis puntas clasicas del tirador, dibujadas con sombras */
+.sortable__handle::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow:
+    0 -6px 0 currentColor,
+    0 6px 0 currentColor,
+    6px 0 0 currentColor,
+    6px -6px 0 currentColor,
+    6px 6px 0 currentColor;
+  transform: translateX(-3px);
+}
+
+/* Variante en rejilla, para las fotos */
+.sortable--grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}

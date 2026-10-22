@@ -7,6 +7,7 @@ import './AboutPreview.css';
 
 export default function AboutPreview({ content }) {
   const { about } = content;
+  const portrait = content.aboutPhoto || images.portrait;
 
   return (
     <section className="about section" id="sobre-mi">
@@ -28,7 +29,7 @@ export default function AboutPreview({ content }) {
 
         <Reveal variant="right" className="about__media" delay={120}>
           <SmartImage
-            image={images.portrait}
+            image={portrait}
             alt="Sebastián Sisa, fotógrafo de eventos en Villapinzón"
             sizes="(max-width: 900px) 90vw, 460px"
           />

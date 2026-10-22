@@ -16,12 +16,16 @@ const Services = lazy(() => import('./pages/Services'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const AdminApp = lazy(() => import('./pages/admin/AdminApp'));
 
 export default function App() {
   return (
     <SiteDataProvider>
       <Suspense fallback={<RouteFallback />}>
         <Routes>
+          {/* El panel va fuera del Layout publico: tiene su propia carcasa */}
+          <Route path="admin/*" element={<AdminApp />} />
+
           <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="portafolio" element={<Portfolio />} />

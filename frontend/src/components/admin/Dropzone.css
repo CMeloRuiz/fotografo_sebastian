@@ -1,0 +1,103 @@
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-7) var(--space-5);
+  text-align: center;
+
+  background-color: var(--admin-surface);
+  border: 2px dashed var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  transition: border-color var(--t-fast) var(--ease-out),
+              background-color var(--t-fast) var(--ease-out);
+}
+
+.dropzone.is-over {
+  border-color: var(--color-accent);
+  background-color: rgba(182, 233, 37, 0.05);
+}
+
+.dropzone.is-busy { opacity: 0.75; }
+
+.dropzone__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--admin-surface-3);
+  color: var(--color-accent);
+}
+
+.dropzone__title { font-weight: 600; }
+
+.dropzone__hint {
+  font-size: 0.8rem;
+  color: var(--admin-text-faint);
+  margin-bottom: var(--space-2);
+}
+
+/* ── Progreso por archivo ───────────────────────────────── */
+
+.dropzone__progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.dropzone__progress li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px 56px;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.8rem;
+  color: var(--admin-text-muted);
+}
+
+.dropzone__progress-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropzone__progress-bar {
+  height: 5px;
+  border-radius: var(--radius-full);
+  background-color: var(--admin-surface-3);
+  overflow: hidden;
+}
+
+.dropzone__progress-bar span {
+  display: block;
+  height: 100%;
+  background-color: var(--color-accent);
+  transition: width 220ms var(--ease-out);
+}
+
+.dropzone__progress .done .dropzone__progress-state { color: var(--color-accent); }
+.dropzone__progress .error .dropzone__progress-state { color: #fca5a5; }
+.dropzone__progress .error .dropzone__progress-bar span { background-color: var(--color-danger); }
+
+.dropzone__progress-state { text-align: right; font-variant-numeric: tabular-nums; }
+
+.dropzone__rejected {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: var(--admin-radius);
+  font-size: 0.8rem;
+  color: #fca5a5;
+}
+
+.dropzone__rejected li + li { margin-top: 4px; }
+
+@media (max-width: 560px) {
+  .dropzone__progress li {
+    grid-template-columns: minmax(0, 1fr) 48px;
+  }
+
+  .dropzone__progress-bar { grid-column: 1 / -1; order: 3; }
+}
