@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: "Outfit", sans-serif;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+
+header.scrolled {
+    background-color: #0f0f0fc2;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    backdrop-filter: blur(7px);
+}
+
+.main-logo {
+    width: 90px;
+    height: 70px;
+}
+
+.main-logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-nav ul {
+    display: flex;
+    gap: 40px;
+}
+
+.menu-nav ul a {
+    color: #ffffffbf;
+}
+
+.contact-button {
+    border: 2px solid #B6E925;
+    padding: 10px 24px;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: "Oswald", sans-serif;
+    transition: all 0.3s;
+}
+
+.underline-nav {
+    border-bottom: 2px solid #B6E925;
+    padding-bottom: 5px;
+}
+
+.contact-button:hover {
+    border: 2px solid #fff;
+    background-color: #fff;
+    color: #212121;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #0f0f0f;
+    padding: 80px 0 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-info {
+    width: 300px;
+}
+
+.footer-info h2 {
+    color: #ffffff;
+    font-family: "Oswald", sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.footer-info p {
+    color: #969696;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 300px;
+}
+
+.footer-contact h3,
+.footer-links h3,
+.footer-social h3 {
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    /* border-bottom: 2px solid #B6E925; */
+    border-bottom: 2px solid #686868;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.contact-info li {
+    color: #d8d8d8;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info li i {
+    color: #8b8b8b;
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 15px;
+}
+
+.footer-links ul li a {
+    color: #d8d8d8;
+    transition: all 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    padding-left: 5px;
+}
+
+.footer .social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.footer .social-link {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #B6E925;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #B6E925;
+    transition: all 0.3s ease;
+}
+
+.footer .social-link:hover {
+    background-color: #B6E925;
+    color: #0f0f0f;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 992px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .footer-info {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        padding: 60px 0 20px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}

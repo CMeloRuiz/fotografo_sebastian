@@ -1,0 +1,49 @@
+.album {
+    background: #b5b5b5;
+    padding: 150px 50px;
+}
+
+.album-photos-container {
+    width: 98%;
+    margin: 0 auto;
+    columns: 4;
+    column-gap: 20px;
+    background-color: #b5b5b5;
+}
+
+.album-photos-container img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    transition: all 0.3s ease;
+    break-inside: avoid;
+}
+
+/* Efecto hover */
+.album-photos-container img:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+    z-index: 1;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .album-photos-container {
+        columns: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .album-photos-container {
+        columns: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .album-photos-container {
+        columns: 1;
+    }
+}
+

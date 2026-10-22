@@ -1,0 +1,22 @@
+# ─── FOTOS PRIVADAS DE CLIENTES — NUNCA VERSIONAR NI SUBIR ───
+images/portafolio/
+
+# ─── Originales pesados del sitio antiguo ───
+# Se conservan en disco como fuente de verdad, pero no entran al repo
+# (383 MB). Las versiones optimizadas viven en /frontend/public.
+images/*.jpg
+images/*.mp4
+images/categories/
+images/categories_test/
+images/servicios/
+!images/logo.png
+!images/logo_2.png
+!images/logo_3.png
+
+# ─── Node ───
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.DS_Store

@@ -1,0 +1,122 @@
+header {
+    background-color: #0f0f0f;
+}
+
+.portfolio-hero {
+    height: 400px;
+    background-color: #0f0f0f;
+    display: flex;
+    align-items: center;
+    padding: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-hero::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    background-color: #B6E925;
+    right: 150px;
+    top: 0;
+    transform: skewX(-30deg);
+}
+
+.portfolio-hero::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 70%;
+    background-color: #B6E925;
+    right: 0;
+    top: 0;
+    transform: rotate(-60deg);
+    transform-origin: top right;
+}
+
+.portfolio-hero h1 {
+    color: #ffffff;
+    margin-right: 130px;
+    font-size: 4rem;
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+}
+
+.portfolio-hero h1::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 80px; 
+    height: 4px;
+    background-color: #B6E925;
+}
+
+.portfolio-hero p {
+    color: #d8d8d8;
+    font-family: "Outfit", sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
+    width: 25vw;
+    line-height: 1.5;
+    position: relative;
+    z-index: 2;
+}
+
+/* Portfolio grid */
+
+.portfolio-container-grid {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 500px;
+    gap: 40px;
+}
+
+.portfolio-container-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-item {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.891));
+    background-size: cover;
+    background-position: center;
+}
+
+.port-item-1 {
+    background-image: url('./images/portafolio/daniela_guevara/foto\ -6\ portada.jpg');
+}
+
+.port-item-2 {
+    background-image: url('./images/portafolio/dayana_rojas/foto\ -69o\ portada.jpg');
+}
+
+.port-item-3 {
+    background-image: url('./images/portafolio/jimena_y_alejandro/FOTO-140\ portada.jpg');
+}
+
+.port-item-4 {
+    background-image: url('./images/portafolio/juan_jose/Mi\ bautizo-95portada.jpg');
+}
+
+.port-item-5 {
+    background-image: url('./images/portafolio/michelle_garcia/Mis\ XV-27\ portada\ .jpg');
+}
+
+.portfolio-item h3 {
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+    margin-top: 400px;
+    text-transform: uppercase;
+}
