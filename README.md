@@ -463,18 +463,39 @@ Si el plan **no soporta Node**, el backend no puede vivir en Hostinger:
 - `CORS_ORIGINS` tiene que incluir `https://sebastiansisa.com`, y las cookies
   quedan con `SameSite=None; Secure`, que es lo que ya hace el código cuando
   `NODE_ENV=production`.
-- Hace falta un `.htaccess` en `public_html` para que el SPA funcione:
+- El `.htaccess` ya está resuelto: vive en [`frontend/public/.htaccess`](frontend/public/.htaccess),
+  así que Vite lo copia a `dist/` en cada build y llega solo a `public_html`.
+  Lleva las rutas del SPA, las redirecciones 301 del sitio antiguo, el caché
+  y la compresión.
 
-```apache
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
-```
+### Despliegue automático desde GitHub
+
+Hostinger tiene su propio despliegue desde Git (**hPanel → Avanzado → Git**),
+pero **no sirve para este repositorio**: hace un `git pull` y publica los
+archivos tal cual, sin ejecutar el build. Aquí lo versionado es el código
+fuente, no el sitio compilado, así que subiría `src/` y `package.json` a
+`public_html` y el sitio no cargaría. Ese flujo sirve para sitios HTML planos
+o WordPress, no para uno con build.
+
+Por eso el build se hace en GitHub y a Hostinger solo viaja `frontend/dist/`.
+El flujo está en [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+y se dispara en cada push a `master` que toque `frontend/`.
+
+Para activarlo hay que añadir en GitHub, en **Settings → Secrets and variables
+→ Actions**:
+
+| Dónde | Nombre | Valor |
+|---|---|---|
+| Secrets | `FTP_HOST` | El servidor FTP que da hPanel (`ftp.tudominio.com`) |
+| Secrets | `FTP_USER` | Usuario FTP |
+| Secrets | `FTP_PASSWORD` | Contraseña FTP |
+| Secrets | `FTP_REMOTE_DIR` | Normalmente `/public_html/` |
+| Variables | `VITE_API_URL` | URL pública del backend |
+| Variables | `VITE_SITE_URL` | URL pública del sitio |
+
+Los tres primeros van como **Secrets**, no como Variables: dan acceso de
+escritura al hosting. Los `VITE_*` van como Variables porque acaban dentro del
+bundle y los ve cualquiera de todos modos.
 
 ---
 

@@ -1,0 +1,65 @@
+name: Despliegue del frontend a Hostinger
+
+# Hostinger tiene su propio despliegue desde Git (hPanel > Avanzado > Git),
+# pero no sirve para este repositorio: hace un pull y publica los archivos
+# tal cual, sin ejecutar el build. Aqui lo que hay en el repo es el codigo
+# fuente, no el sitio compilado, asi que subiria src/ y package.json a
+# public_html y el sitio no cargaria.
+#
+# Por eso el build se hace aqui, en GitHub, y a Hostinger solo viaja el
+# contenido de frontend/dist/, que es exactamente lo que el servidor
+# tiene que servir. De paso, dist/ se queda fuera del repositorio.
+
+on:
+  push:
+    branches: [master]
+    # El backend vive en otro sitio: no tiene sentido redesplegar el
+    # frontend por un cambio que no le afecta.
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Instalar dependencias
+        working-directory: frontend
+        run: npm ci
+
+      - name: Compilar el sitio
+        working-directory: frontend
+        env:
+          # URL publica del backend. Se incrusta en el bundle y es visible
+          # para cualquiera, asi que aqui no va ningun secreto: solo la
+          # direccion de la API.
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
+        run: npm run build
+
+      - name: Subir a Hostinger por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # La barra final importa: sin ella sube la carpeta, no su contenido.
+          local-dir: ./frontend/dist/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          # La accion guarda un manifiesto en el servidor y en los despliegues
+          # siguientes solo sube lo que cambio.
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
