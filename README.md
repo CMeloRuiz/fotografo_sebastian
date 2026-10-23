@@ -478,8 +478,19 @@ fuente, no el sitio compilado, así que subiría `src/` y `package.json` a
 o WordPress, no para uno con build.
 
 Por eso el build se hace en GitHub y a Hostinger solo viaja `frontend/dist/`.
-El flujo está en [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
-y se dispara en cada push a `master` que toque `frontend/`.
+El flujo está en [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+
+> **Arranca en manual**, desde la pestaña *Actions* del repositorio, botón
+> *Run workflow*. Es a propósito: mientras `public_html` tenga el sitio
+> antiguo en vivo, un despliegue automático lo reemplazaría en el primer push,
+> sin avisar y antes de que el backend esté listo. Cuando el sitio nuevo ya
+> esté en producción, descomenta el bloque `push` del flujo y cada cambio en
+> `frontend/` se desplegará solo.
+
+**Antes del primer despliegue, haz una copia de `public_html`.** Desde hPanel,
+en *Archivos → Administrador de archivos*, comprime la carpeta y descárgala.
+El despliegue sobrescribe, y el sitio antiguo es lo único que hay si algo sale
+mal.
 
 Para activarlo hay que añadir en GitHub, en **Settings → Secrets and variables
 → Actions**:

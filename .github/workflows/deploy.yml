@@ -10,15 +10,23 @@ name: Despliegue del frontend a Hostinger
 # contenido de frontend/dist/, que es exactamente lo que el servidor
 # tiene que servir. De paso, dist/ se queda fuera del repositorio.
 
+# De momento solo se lanza a mano, desde la pestana Actions del repositorio
+# (boton "Run workflow"). Es a proposito: public_html todavia tiene el sitio
+# antiguo en vivo, y un despliegue automatico lo reemplazaria en el primer
+# push, sin avisar y antes de que el backend este listo.
+#
+# Cuando el sitio nuevo ya este en produccion y funcionando, descomenta el
+# bloque push de abajo y cada cambio en frontend/ se desplegara solo.
 on:
-  push:
-    branches: [master]
-    # El backend vive en otro sitio: no tiene sentido redesplegar el
-    # frontend por un cambio que no le afecta.
-    paths:
-      - 'frontend/**'
-      - '.github/workflows/deploy.yml'
   workflow_dispatch:
+
+  # push:
+  #   branches: [master]
+  #   # El backend vive en otro sitio: no tiene sentido redesplegar el
+  #   # frontend por un cambio que no le afecta.
+  #   paths:
+  #     - 'frontend/**'
+  #     - '.github/workflows/deploy.yml'
 
 jobs:
   desplegar:
