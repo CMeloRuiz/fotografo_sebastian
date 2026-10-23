@@ -480,13 +480,30 @@ Habría que verificar que el plan permite procesos persistentes.
 
 ### Variante C — Hosting compartido, solo PHP
 
-Si el plan **no soporta Node**, el backend no puede vivir en Hostinger:
+El plan contratado no soporta Node, así que el backend no puede vivir en
+Hostinger:
 
-- El **frontend** sí: sube el contenido de `frontend/dist/` a `public_html`.
-- El **backend** se queda en Render (o similar) y `VITE_API_URL` apunta allí.
-- `CORS_ORIGINS` tiene que incluir `https://sebastiansisa.com`, y las cookies
-  quedan con `SameSite=None; Secure`, que es lo que ya hace el código cuando
-  `NODE_ENV=production`.
+- El **frontend** sí: `frontend/dist/` a `public_html`, con el flujo de
+  GitHub Actions de más abajo.
+- El **backend** va a Render. La configuración está en
+  [`render.yaml`](render.yaml), así que el servicio se crea leyendo ese
+  archivo en vez de rellenar el formulario a mano.
+
+#### La API va en un subdominio propio, no en la URL de Render
+
+Esto no es cosmético. Si la API queda en `algo.onrender.com` mientras el sitio
+está en `sebastiansisa.com`, la cookie de sesión es **de terceros**, y Safari
+las bloquea de serie. El fotógrafo abriría el panel desde su iPhone y la
+sesión no le duraría ni una pantalla.
+
+Poniendo la API en `api.sebastiansisa.com`, para el navegador es *el mismo
+sitio* —comparten dominio registrable— y la cookie pasa a ser de primera
+parte. Funciona en todos los navegadores y además permite `SameSite=Lax`, que
+es más estricto que `None`.
+
+Por eso `COOKIE_SAMESITE` vale `lax` en `render.yaml`. Si alguna vez se usara
+la URL de onrender.com directamente, habría que ponerlo en `none`; el código
+soporta las dos y en ambos casos manda `Secure`.
 - El `.htaccess` ya está resuelto: vive en [`frontend/public/.htaccess`](frontend/public/.htaccess),
   así que Vite lo copia a `dist/` en cada build y llega solo a `public_html`.
   Lleva las rutas del SPA, las redirecciones 301 del sitio antiguo, el caché

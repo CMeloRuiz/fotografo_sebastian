@@ -1,0 +1,77 @@
+# Despliegue del backend en Render.
+#
+# Render lee este archivo al conectar el repositorio (Blueprint) y crea el
+# servicio con esta configuracion, en vez de rellenar el formulario a mano.
+#
+# Las variables marcadas sync:false NO se guardan aqui: Render las pide al
+# crear el servicio y las guarda cifradas. Son secretos y no van al repo,
+# que ademas es publico.
+
+services:
+  - type: web
+    name: sebastian-sisa-api
+    runtime: node
+    plan: free
+    region: oregon
+    # El backend vive en una subcarpeta del repositorio.
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    # Render reinicia el servicio si esta ruta deja de responder.
+    healthCheckPath: /api/health
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # ── Supabase ─────────────────────────────────────────
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_STORAGE_BUCKET
+        value: photos
+
+      # ── Sesion del panel ─────────────────────────────────
+      # Render genera un secreto aleatorio la primera vez y lo conserva
+      # entre despliegues. Si se regenera, se cierran todas las sesiones.
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_TTL
+        value: 7d
+
+      # 'lax' porque la API va en api.sebastiansisa.com, un subdominio del
+      # mismo dominio que el sitio. Si se usara la URL de onrender.com
+      # directamente, aqui tendria que decir 'none', y entonces Safari
+      # bloquearia la sesion por ser cookie de terceros.
+      - key: COOKIE_SAMESITE
+        value: lax
+
+      # ── CORS ─────────────────────────────────────────────
+      - key: CORS_ORIGINS
+        value: https://sebastiansisa.com,https://www.sebastiansisa.com
+
+      - key: SITE_URL
+        value: https://sebastiansisa.com
+
+      # ── Subidas ──────────────────────────────────────────
+      - key: MAX_UPLOAD_MB
+        value: 25
+      - key: MAX_UPLOAD_FILES
+        value: 20
+
+      # ── Correo del formulario (opcional) ─────────────────
+      # Sin esto el mensaje se guarda igual y se ve en el panel; lo unico
+      # que no pasa es que llegue el aviso por correo.
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: MAIL_FROM
+        value: Sitio web <no-reply@sebastiansisa.com>
+      - key: MAIL_TO
+        sync: false

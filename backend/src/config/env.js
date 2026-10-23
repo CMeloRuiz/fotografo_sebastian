@@ -40,6 +40,19 @@ export const config = {
     tokenTtl: optional('JWT_TTL', '7d'),
     cookieName: 'ss_session',
     cookieMaxAge: 7 * 24 * 60 * 60 * 1000,
+
+    /*
+     * 'lax' sirve cuando la API esta en un subdominio del mismo dominio que
+     * el sitio (api.sebastiansisa.com y sebastiansisa.com): para el navegador
+     * son el mismo sitio, aunque sean origenes distintos.
+     *
+     * Solo hace falta 'none' si la API vive en otro dominio, por ejemplo
+     * directamente en algo.onrender.com. Esa cookie es de terceros, y Safari
+     * la bloquea de serie: el fotografo entraria al panel desde el iPhone y
+     * la sesion no le duraria ni una pantalla. Por eso el valor por defecto
+     * es el que funciona en todas partes.
+     */
+    cookieSameSite: optional('COOKIE_SAMESITE', 'lax'),
   },
 
   cors: {

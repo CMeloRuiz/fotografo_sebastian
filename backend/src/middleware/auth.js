@@ -14,26 +14,32 @@ export function issueSession(res, admin) {
     expiresIn: config.auth.tokenTtl,
   });
 
-  res.cookie(config.auth.cookieName, token, {
-    httpOnly: true,
-    // En produccion el panel y la API viven en dominios distintos (Render),
-    // asi que la cookie tiene que ser SameSite=None, y eso exige Secure.
-    secure: config.isProduction,
-    sameSite: config.isProduction ? 'none' : 'lax',
-    maxAge: config.auth.cookieMaxAge,
-    path: '/',
-  });
+  res.cookie(config.auth.cookieName, token, { ...cookieOptions(), maxAge: config.auth.cookieMaxAge });
 
   return token;
 }
 
-export function clearSession(res) {
-  res.clearCookie(config.auth.cookieName, {
+/**
+ * Las mismas opciones al poner y al borrar la cookie.
+ *
+ * El navegador solo borra una cookie si las opciones coinciden con las que
+ * tenia. Si esto se duplica y un dia cambia en un sitio y no en el otro,
+ * cerrar sesion deja de funcionar y no se nota hasta que alguien lo prueba.
+ */
+function cookieOptions() {
+  const sameSite = config.isProduction ? config.auth.cookieSameSite : 'lax';
+
+  return {
     httpOnly: true,
-    secure: config.isProduction,
-    sameSite: config.isProduction ? 'none' : 'lax',
+    // SameSite=None sin Secure la rechazan todos los navegadores.
+    secure: config.isProduction || sameSite === 'none',
+    sameSite,
     path: '/',
-  });
+  };
+}
+
+export function clearSession(res) {
+  res.clearCookie(config.auth.cookieName, cookieOptions());
 }
 
 export function requireAuth(req, res, next) {
