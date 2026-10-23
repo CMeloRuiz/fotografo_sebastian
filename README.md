@@ -120,8 +120,8 @@ necesita.
 |---|---|---|
 | `NODE_ENV` | no | `production` activa cookies `Secure` y `SameSite=None` |
 | `PORT` | no | Puerto de la API (4000 por defecto) |
-| `SUPABASE_URL` | **sí** | URL del proyecto de Supabase |
-| `SUPABASE_SERVICE_ROLE_KEY` | **sí** | Clave `service_role`. **Nunca** la `anon`, y nunca en el navegador |
+| `SUPABASE_URL` | **sí** | URL del proyecto (Settings → Data API) |
+| `SUPABASE_SERVICE_ROLE_KEY` | **sí** | Clave del servidor: la `secret key` (`sb_secret_…`) o la antigua `service_role`. **Nunca** la publishable/anon, y nunca en el navegador |
 | `SUPABASE_STORAGE_BUCKET` | no | Bucket de fotos (`photos` por defecto) |
 | `JWT_SECRET` | **sí** | Firma la sesión del panel |
 | `JWT_TTL` | no | Duración de la sesión (`7d` por defecto) |
@@ -156,7 +156,14 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 1. Crea un proyecto en [supabase.com](https://supabase.com).
 2. Abre **SQL Editor** y ejecuta entero `backend/db/schema.sql`. Es idempotente:
    puedes volver a correrlo sin romper nada.
-3. Copia `URL` y `service_role` desde **Project Settings → API** a tu `.env`.
+3. Copia la URL desde **Settings → Data API** y crea una clave de servidor en
+   **Settings → API Keys → Secret keys → New secret key**. Pega las dos en tu
+   `.env`. La clave solo se muestra una vez.
+
+   > Supabase sustituyó `anon`/`service_role` por claves *publishable* y
+   > *secret*, y retirará las antiguas a finales de 2026. Las dos funcionan
+   > hoy; en un proyecto nuevo usa la *secret key*. Las nuevas son cadenas
+   > opacas, no JWT, así que requieren `@supabase/supabase-js` reciente.
 4. El bucket `photos` se crea solo la primera vez que arranca el backend. Si
    prefieres crearlo a mano: **Storage → New bucket**, nombre `photos`, público.
 5. Carga el contenido inicial:
