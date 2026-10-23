@@ -12,7 +12,11 @@ services:
     name: sebastian-sisa-api
     runtime: node
     plan: free
-    region: oregon
+    # La region NO se puede cambiar despues de crear el servicio.
+    # Virginia es la mas cercana a Colombia de las que ofrece Render: desde
+    # Bogota son unos 60-80 ms, frente a los 130-160 de Oregon. Se nota
+    # subiendo fotos desde el celular, que es cada peticion al backend.
+    region: virginia
     # El backend vive en una subcarpeta del repositorio.
     rootDir: backend
     buildCommand: npm ci
