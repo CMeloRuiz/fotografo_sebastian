@@ -4,12 +4,15 @@
   "version": "1.0.0",
   "type": "module",
   "main": "src/server.js",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
     "seed": "node db/seed.js",
-    "create-admin": "node db/createAdmin.js"
+    "create-admin": "node db/createAdmin.js",
+    "verify": "node scripts/verify-flows.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.45.4",

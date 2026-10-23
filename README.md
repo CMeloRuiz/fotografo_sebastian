@@ -107,6 +107,7 @@ necesita.
 | `backend` | `npm start` | API en modo producción |
 | `backend` | `npm run seed` | Carga el contenido inicial |
 | `backend` | `npm run create-admin` | Crea o actualiza el usuario del panel |
+| `backend` | `npm run verify` | Prueba de punta a punta los flujos que escriben datos |
 | `scripts` | `npm run optimize` | Regenera las imágenes optimizadas |
 
 ---
@@ -589,6 +590,20 @@ de punta a punta.
 álbum, subir foto, reordenar, eliminar, enviar el formulario— porque hacen
 falta las credenciales de un proyecto de Supabase real. El código está
 completo; falta la prueba contra datos reales.
+
+Para eso está `npm run verify`, en `backend/`. Levanta el backend, apúntalo a
+un Supabase real y ejecútalo: crea un administrador desechable y un álbum de
+prueba, recorre los 27 pasos del flujo completo —sesión, subida con sus cinco
+variantes, limpieza de EXIF, reordenar, portada, girar, publicar, formulario,
+contenido, borrado y limpieza del storage— y borra todo lo que creó, pase lo
+que pase. Informa paso por paso y sale con código 1 si algo falla.
+
+```bash
+cd backend && npm run dev          # en una terminal
+cd backend && npm run verify       # en otra
+```
+
+Sirve igual contra el backend desplegado: `API=https://mi-api.onrender.com npm run verify`.
 
 ### Mejoras futuras
 
