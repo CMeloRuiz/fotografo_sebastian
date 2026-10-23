@@ -20,3 +20,6 @@ dist/
 .env.local
 *.log
 .DS_Store
+
+# Credenciales generadas localmente, nunca al repo
+credenciales-admin.txt
