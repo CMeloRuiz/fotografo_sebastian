@@ -361,8 +361,32 @@ Luego vuelve al backend y pon la URL definitiva del frontend en `CORS_ORIGINS`.
 
 El cliente ya tiene dominio y hosting pagados. **El dominio no se toca.**
 
-> **Pendiente de confirmar:** qué plan tiene contratado. De eso depende si el
-> backend puede vivir ahí o no. Las tres variantes están abajo.
+**Plan confirmado (23 de octubre de 2026):** hosting **compartido**, servidor
+`server1849` en Boston (EE. UU.), 10 GB de disco, 1 núcleo, 1024 MB de RAM,
+25 PHP workers, 1 sitio web, 100 GB de transferencia. Dominio
+`sebastiansisa.com`, IP `46.202.183.232`, DNS ya apuntando a Hostinger.
+
+Que el panel hable de *PHP workers* y *máximo de procesos* es lo que delata que
+es compartido: ahí no corren procesos persistentes de Node. Hostinger sí ofrece
+Node.js, pero en los planes Business y Cloud hacia arriba, y este queda por
+debajo. **Para confirmarlo en un segundo:** hPanel → *Avanzado*. Si no aparece
+una entrada **Node.js**, está decidido.
+
+👉 **Aplica la [variante C](#variante-c--hosting-compartido-solo-php):** el
+frontend en Hostinger, el backend en Render. Las variantes A y B quedan abajo
+como referencia por si algún día se sube de plan.
+
+### Dimensionamiento
+
+Las fotos no viven en Hostinger sino en Supabase, así que sus 10 GB y sus
+100 GB de transferencia sobran: el hosting solo sirve el HTML, el CSS, el JS
+y las imágenes fijas del sitio, que pesan 278 KB en total.
+
+El límite real es Supabase. Medido sobre las imágenes ya optimizadas del
+proyecto, **cada foto ocupa unos 635 KB** sumando sus cinco anchos en AVIF y
+WebP, el JPEG de respaldo y la miniatura. En el gigabyte del plan gratuito
+caben **unas 1.650 fotos**, que da para bastante; cuando se acerque, el salto
+es a un plan de pago de Supabase, no a uno de Hostinger.
 
 ### Variante A — VPS (lo ideal)
 
@@ -497,12 +521,19 @@ Para activarlo hay que añadir en GitHub, en **Settings → Secrets and variable
 
 | Dónde | Nombre | Valor |
 |---|---|---|
-| Secrets | `FTP_HOST` | El servidor FTP que da hPanel (`ftp.tudominio.com`) |
-| Secrets | `FTP_USER` | Usuario FTP |
-| Secrets | `FTP_PASSWORD` | Contraseña FTP |
-| Secrets | `FTP_REMOTE_DIR` | Normalmente `/public_html/` |
-| Variables | `VITE_API_URL` | URL pública del backend |
-| Variables | `VITE_SITE_URL` | URL pública del sitio |
+| Secrets | `FTP_HOST` | `46.202.183.232` **sin `ftp://`** (ver nota abajo) |
+| Secrets | `FTP_USER` | `uXXXXXXXXX` |
+| Secrets | `FTP_PASSWORD` | La de hPanel. No se puede consultar; si no se recuerda, se cambia ahí mismo |
+| Secrets | `FTP_REMOTE_DIR` | `/public_html/` |
+| Variables | `VITE_API_URL` | URL del backend en Render, cuando exista |
+| Variables | `VITE_SITE_URL` | `https://sebastiansisa.com` |
+
+> **El `ftp://` no va.** hPanel muestra el host como `ftp://sebastiansisa.com`,
+> pero la acción de despliegue espera solo el nombre o la IP. Con el prefijo
+> falla al conectar.
+
+> En los planes con SSH, la contraseña FTP del dominio principal **es también
+> la de SSH**: cambiar una cambia la otra.
 
 Los tres primeros van como **Secrets**, no como Variables: dan acceso de
 escritura al hosting. Los `VITE_*` van como Variables porque acaban dentro del
