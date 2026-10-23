@@ -8,7 +8,19 @@ import { toAlbum, toService, toTestimonial } from '../lib/mappers.js';
  * Cache-Control y el CDN o el navegador puede reutilizarlo.
  */
 
-const PUBLIC_CACHE = 'public, max-age=60, stale-while-revalidate=600';
+/*
+ * max-age=0 obliga al navegador a revalidar en cada visita. No es caro:
+ * Express manda ETag y la respuesta repetida se resuelve con un 304 vacio.
+ *
+ * Antes era max-age=60, y eso rompia lo primero que hace el fotografo al
+ * publicar un album: abrir el sitio para verlo. Durante el minuto siguiente
+ * su navegador le seguia dando la respuesta vieja y el album no aparecia,
+ * que desde su lado se ve exactamente igual que si no hubiera funcionado.
+ *
+ * s-maxage sigue dejando que un CDN o un proxy cachee un minuto, que es
+ * donde el cache de verdad importa cuando hay visitas.
+ */
+const PUBLIC_CACHE = 'public, max-age=0, s-maxage=60, stale-while-revalidate=600';
 
 function fail(res, error, what) {
   console.error(`[public] fallo al leer ${what}:`, error);
