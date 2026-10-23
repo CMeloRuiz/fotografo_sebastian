@@ -538,12 +538,16 @@ Para activarlo hay que añadir en GitHub, en **Settings → Secrets and variable
 
 | Dónde | Nombre | Valor |
 |---|---|---|
-| Secrets | `FTP_HOST` | `46.202.183.232` **sin `ftp://`** (ver nota abajo) |
-| Secrets | `FTP_USER` | `uXXXXXXXXX` |
+| Secrets | `FTP_HOST` | La IP del hosting, **sin `ftp://`** (ver nota abajo) |
+| Secrets | `FTP_USER` | El usuario FTP, con forma `uXXXXXXXXX` |
 | Secrets | `FTP_PASSWORD` | La de hPanel. No se puede consultar; si no se recuerda, se cambia ahí mismo |
 | Secrets | `FTP_REMOTE_DIR` | `/public_html/` |
-| Variables | `VITE_API_URL` | URL del backend en Render, cuando exista |
+| Variables | `VITE_API_URL` | `https://api.sebastiansisa.com` |
 | Variables | `VITE_SITE_URL` | `https://sebastiansisa.com` |
+
+Los tres primeros valores están en hPanel, en **Websites → Administrar →
+Cuentas FTP**. No se escriben aquí: este repositorio es público, y el usuario
+de FTP es la mitad de una credencial con permiso de escritura sobre el sitio.
 
 > **El `ftp://` no va.** hPanel muestra el host como `ftp://sebastiansisa.com`,
 > pero la acción de despliegue espera solo el nombre o la IP. Con el prefijo
