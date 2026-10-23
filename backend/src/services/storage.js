@@ -50,14 +50,41 @@ export async function removeMany(paths) {
  */
 export async function removePhotoFiles(storagePath) {
   const folder = storagePath.split('/').slice(0, -1).join('/');
-  const base = storagePath.split('/').pop().replace(/\.[^.]+$/, '');
 
-  const { data, error } = await supabase.storage.from(BUCKET).list(folder, { limit: 100 });
-  if (error) throw new Error(`No se pudo listar ${folder}: ${error.message}`);
+  /*
+   * storage_path apunta al JPEG mas grande: <base>-<ancho>.jpg. Las demas
+   * variantes son <base>-<ancho>.avif/.webp y <base>-thumb.webp, asi que
+   * hay que quitar tambien el sufijo del ancho, no solo la extension.
+   *
+   * Quitando solo la extension, el prefijo se quedaba en "<base>-1920" y
+   * unicamente borraba las tres variantes de 1920: las otras nueve se
+   * quedaban en el bucket para siempre, ocupando cuota invisible.
+   */
+  const base = storagePath.split('/').pop().replace(/-[^-]+\.[^.]+$/, '');
 
-  const toRemove = (data || [])
-    .filter((file) => file.name.startsWith(base))
-    .map((file) => `${folder}/${file.name}`);
+  /*
+   * list() devuelve como mucho 100 entradas por llamada y cada foto deja
+   * doce archivos, asi que a partir del noveno album la primera pagina ya
+   * no alcanza. Recorremos hasta agotar la carpeta.
+   */
+  const PAGINA = 100;
+  const toRemove = [];
+
+  for (let offset = 0; ; offset += PAGINA) {
+    const { data, error } = await supabase.storage
+      .from(BUCKET)
+      .list(folder, { limit: PAGINA, offset });
+
+    if (error) throw new Error(`No se pudo listar ${folder}: ${error.message}`);
+    if (!data?.length) break;
+
+    for (const file of data) {
+      // El guion final evita que "foto-ab12" arrastre a "foto-ab12x"
+      if (file.name.startsWith(`${base}-`)) toRemove.push(`${folder}/${file.name}`);
+    }
+
+    if (data.length < PAGINA) break;
+  }
 
   await removeMany(toRemove);
   return toRemove.length;

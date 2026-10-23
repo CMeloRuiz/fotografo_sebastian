@@ -319,11 +319,22 @@ try {
     await api(`/admin/photos/${photoIds[0]}/transform`, { method: 'POST', body: { rotate: 90 } });
     const { data: despues } = await db.from('photos').select('width, height').eq('id', photoIds[0]).single();
 
+    /*
+     * No se comparan pixeles exactos a proposito. El pipeline guarda las
+     * dimensiones de la variante mas grande que genera, no las del original,
+     * y al girar una foto apaisada la mas grande baja de escalon: 1920x1280
+     * acaba en 1200x1800, no en 1280x1920. Lo que tiene que conservarse es
+     * la proporcion invertida, que es de lo que depende el hueco reservado
+     * en la pagina.
+     */
+    const ratioAntes = antes.width / antes.height;
+    const ratioDespues = despues.width / despues.height;
+
     assert(
-      despues.width === antes.height && despues.height === antes.width,
-      `tras girar 90 se esperaba ${antes.height}x${antes.width}, quedo ${despues.width}x${despues.height}`,
+      Math.abs(ratioDespues - 1 / ratioAntes) < 0.02,
+      `la proporcion no se invirtio: ${ratioAntes.toFixed(3)} -> ${ratioDespues.toFixed(3)}`,
     );
-    return `${antes.width}x${antes.height} -> ${despues.width}x${despues.height}`;
+    return `${antes.width}x${antes.height} -> ${despues.width}x${despues.height}, proporcion invertida`;
   });
 
   // ── 5. Publicacion y API publica ───────────────────────────
@@ -515,16 +526,20 @@ try {
   // ── Limpieza, pase lo que pase ─────────────────────────────
   const pendiente = [];
 
-  if (albumId) {
-    const { data: rows } = await db.from('photos').select('storage_path').eq('album_id', albumId);
-    for (const r of rows || []) {
-      const carpeta = r.storage_path.split('/').slice(0, -1).join('/');
-      const { data: files } = await db.storage.from(BUCKET).list(carpeta, { limit: 200 });
-      if (files?.length) {
-        await db.storage.from(BUCKET).remove(files.map((f) => `${carpeta}/${f.name}`));
-      }
-      break;
+  /*
+   * La carpeta se limpia a partir de rutaEjemplo, no consultando la tabla
+   * photos: si el fallo fue justamente que quedaron archivos huerfanos, las
+   * filas ya no estan y por la tabla no se llegaria a ellos.
+   */
+  if (rutaEjemplo) {
+    const carpeta = rutaEjemplo.split('/').slice(0, -1).join('/');
+    const { data: files } = await db.storage.from(BUCKET).list(carpeta, { limit: 1000 });
+    if (files?.length) {
+      await db.storage.from(BUCKET).remove(files.map((f) => `${carpeta}/${f.name}`));
+      pendiente.push(`${files.length} archivos de prueba`);
     }
+  }
+  if (albumId) {
     await db.from('albums').delete().eq('id', albumId);
     pendiente.push('album de prueba');
   }
