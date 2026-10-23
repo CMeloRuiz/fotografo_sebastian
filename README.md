@@ -593,14 +593,22 @@ escritorio, ausencia de desbordes horizontales en 360, 390, 768, 1024, 1440 y
 validación, guardas de sesión, manejo de errores y el flujo de acceso al panel
 de punta a punta.
 
-**No verificado todavía:** los flujos que escriben en la base de datos —crear
-álbum, subir foto, reordenar, eliminar, enviar el formulario— porque hacen
-falta las credenciales de un proyecto de Supabase real. El código está
-completo; falta la prueba contra datos reales.
+**Verificado contra Supabase real** (23 de octubre de 2026): los 32 pasos de
+`npm run verify` pasan, y además se recorrió el panel en el navegador —entrar,
+crear álbum, subir dos fotos con su barra de progreso, publicar, verlo en el
+sitio público y borrarlo— comprobando que no quedan archivos huérfanos.
 
-Para eso está `npm run verify`, en `backend/`. Levanta el backend, apúntalo a
+Esa prueba encontró dos bugs reales, los dos ya corregidos: el borrado dejaba
+nueve de los doce archivos de cada foto en el almacenamiento, y un álbum recién
+publicado tardaba un minuto en aparecer en el sitio.
+
+**Pendiente:** el aviso por correo del formulario, que necesita credenciales
+SMTP. Sin ellas el mensaje se guarda igual y se ve en el panel; solo no se
+manda el correo.
+
+Para repetir la comprobación está `npm run verify`, en `backend/`. Levanta el backend, apúntalo a
 un Supabase real y ejecútalo: crea un administrador desechable y un álbum de
-prueba, recorre los 27 pasos del flujo completo —sesión, subida con sus cinco
+prueba, recorre los 32 pasos del flujo completo —sesión, subida con sus cinco
 variantes, limpieza de EXIF, reordenar, portada, girar, publicar, formulario,
 contenido, borrado y limpieza del storage— y borra todo lo que creó, pase lo
 que pase. Informa paso por paso y sale con código 1 si algo falla.
